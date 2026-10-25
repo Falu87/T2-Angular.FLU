@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h2>Gestión de Alumnos</h2>
+
+  @if (mensajeError) {
+    <div class="alert alert-danger">{{ mensajeError }}</div>
+  }
+
+  <table class="table table-bordered mt-3">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombres</th>
+        <th>Carrera</th>
+        <th>Ciclo</th>
+        <th>Promedio</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (alumno of alumnos; track alumno.id) {
+        <tr>
+          <td>{{ alumno.id }}</td>
+          <td>{{ alumno.nombres }}</td>
+          <td>{{ alumno.carrera }}</td>
+          <td>{{ alumno.ciclo }}</td>
+          <td>{{ alumno.promedio }}</td>
+          <td>
+            <span class="badge" 
+                  [class.text-bg-success]="alumno.estadoAcademico === 'REGULAR'" 
+                  [class.text-bg-danger]="alumno.estadoAcademico === 'EN RIESGO'">
+              {{ alumno.estadoAcademico }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="eliminar(alumno.id)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
